@@ -3,57 +3,338 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>It works!</title>
-  <meta name="description" content="A starter page, built by Claude and hosted on Cloudflare Pages.">
+  <title>Stillson Web Co. | Websites for Local Businesses</title>
+  <meta name="description" content="Simple, fast websites for local businesses. Built in about a week, working great on phones, with friendly updates whenever you need them.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f7f5f0;
-      --ink: #1d1d1b;
-      --muted: #5c5a55;
-      --accent: #e0662b;
+      --bg: #fbf8f3;
+      --bg-alt: #f2ece2;
+      --ink: #1c1b19;
+      --muted: #5e5a52;
+      --line: #e3dccf;
+      --accent: #d9582b;
+      --accent-dark: #b8441b;
       --card: #ffffff;
+      --radius: 18px;
     }
-    @media (prefers-color-scheme: dark) {
-      :root { --bg: #161614; --ink: #f2f0ea; --muted: #a8a59d; --card: #22211e; }
-    }
-    * { box-sizing: border-box; margin: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px 16px;
       background: var(--bg);
       color: var(--ink);
-      font: 18px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font: 17px/1.65 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     }
-    main {
-      max-width: 560px;
-      width: 100%;
-      background: var(--card);
-      border-radius: 20px;
-      padding: 48px 36px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-      text-align: center;
-    }
-    .dot {
-      width: 64px; height: 64px;
-      margin: 0 auto 24px;
-      border-radius: 50%;
+    a { color: inherit; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+    h1, h2, h3 { font-family: Fraunces, Georgia, serif; line-height: 1.15; }
+
+    /* Header */
+    header { padding: 20px 0; }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .logo { font-family: Fraunces, Georgia, serif; font-weight: 700; font-size: 1.3rem; text-decoration: none; }
+    .logo span { color: var(--accent); }
+    nav a { text-decoration: none; margin-left: 24px; color: var(--muted); font-weight: 500; }
+    nav a:hover { color: var(--ink); }
+
+    .btn {
+      display: inline-block;
       background: var(--accent);
-      display: grid; place-items: center;
-      color: #fff; font-size: 32px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 14px 26px;
+      border-radius: 999px;
+      transition: background .15s, transform .15s;
     }
-    h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 12px; }
-    p { color: var(--muted); }
-    footer { margin-top: 32px; font-size: 0.85rem; color: var(--muted); }
+    .btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn.ghost { background: transparent; color: var(--ink); border: 2px solid var(--ink); }
+    .btn.ghost:hover { background: var(--ink); color: #fff; }
+
+    /* Hero */
+    .hero { padding: 64px 0 88px; }
+    .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+    .eyebrow { color: var(--accent); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; font-size: .85rem; margin-bottom: 14px; }
+    .hero h1 { font-size: clamp(2.4rem, 5.5vw, 3.8rem); margin-bottom: 20px; }
+    .hero p.lead { font-size: 1.15rem; color: var(--muted); max-width: 34em; margin-bottom: 32px; }
+    .hero .actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* Phone mockup */
+    .phone {
+      width: 280px; max-width: 100%; margin: 0 auto;
+      background: #1c1b19; border-radius: 40px; padding: 12px;
+      box-shadow: 0 30px 60px rgba(28, 27, 25, .18);
+      transform: rotate(3deg);
+    }
+    .screen { background: var(--card); border-radius: 30px; overflow: hidden; }
+    .screen .top { background: #2f5d50; color: #fff; padding: 28px 20px 24px; }
+    .screen .top small { opacity: .75; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
+    .screen .top h3 { font-size: 1.35rem; margin-top: 6px; }
+    .screen .body { padding: 18px 20px 24px; font-size: .8rem; color: var(--muted); }
+    .screen .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .screen .row b { color: var(--ink); font-weight: 600; }
+    .screen .call { display: block; text-align: center; margin-top: 16px; background: var(--accent); color: #fff; border-radius: 10px; padding: 10px; font-weight: 600; }
+
+    /* Sections */
+    section { padding: 88px 0; }
+    section.alt { background: var(--bg-alt); }
+    .section-head { max-width: 640px; margin-bottom: 48px; }
+    .section-head h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); margin-bottom: 12px; }
+    .section-head p { color: var(--muted); }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+    }
+    .card .icon {
+      width: 46px; height: 46px; border-radius: 12px;
+      background: #fbe6dc; color: var(--accent);
+      display: grid; place-items: center; font-size: 1.3rem; margin-bottom: 18px;
+    }
+    .card h3 { font-size: 1.3rem; margin-bottom: 8px; }
+    .card p { color: var(--muted); }
+
+    /* Pricing */
+    .price-card { display: flex; flex-direction: column; }
+    .price-card.featured { border: 2px solid var(--accent); position: relative; }
+    .badge {
+      position: absolute; top: -13px; left: 30px;
+      background: var(--accent); color: #fff; font-size: .75rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 999px; letter-spacing: .04em;
+    }
+    .price { font-family: Fraunces, Georgia, serif; font-size: 2.3rem; font-weight: 700; margin: 6px 0 4px; }
+    .price small { font-family: Inter, sans-serif; font-size: .95rem; font-weight: 500; color: var(--muted); }
+    .price-card ul { list-style: none; margin: 18px 0 0; }
+    .price-card li { padding: 7px 0 7px 28px; position: relative; color: var(--muted); }
+    .price-card li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+
+    /* Steps */
+    .steps { counter-reset: step; }
+    .steps .card h3::before {
+      counter-increment: step; content: counter(step);
+      display: inline-grid; place-items: center;
+      width: 34px; height: 34px; margin-right: 10px; border-radius: 50%;
+      background: var(--ink); color: #fff; font-family: Inter, sans-serif; font-size: .95rem;
+    }
+
+    /* FAQ */
+    .faq { max-width: 760px; }
+    details { border-bottom: 1px solid var(--line); padding: 20px 0; }
+    summary { cursor: pointer; font-weight: 600; font-size: 1.08rem; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: var(--accent); font-size: 1.4rem; line-height: 1; }
+    details[open] summary::after { content: "−"; }
+    details p { color: var(--muted); margin-top: 10px; }
+
+    /* Contact */
+    .contact {
+      background: var(--ink); color: #fff; border-radius: 28px;
+      padding: 64px 48px; text-align: center;
+    }
+    .contact h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); margin-bottom: 14px; }
+    .contact p { color: #cfc9bf; max-width: 520px; margin: 0 auto 30px; }
+    .contact .actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .contact .btn.ghost { color: #fff; border-color: #fff; }
+    .contact .btn.ghost:hover { background: #fff; color: var(--ink); }
+
+    footer { padding: 36px 0 48px; color: var(--muted); font-size: .9rem; text-align: center; }
+
+    @media (max-width: 860px) {
+      .hero .wrap { grid-template-columns: 1fr; gap: 48px; }
+      .grid-3 { grid-template-columns: 1fr; }
+      nav a:not(.btn) { display: none; }
+      .logo, nav .btn { white-space: nowrap; }
+      nav .btn { font-size: .9rem; padding: 9px 16px !important; }
+      section { padding: 64px 0; }
+      .contact { padding: 48px 24px; }
+    }
   </style>
 </head>
 <body>
+  <header>
+    <div class="wrap">
+      <a href="#" class="logo">Stillson <span>Web Co.</span></a>
+      <nav>
+        <a href="#services">What you get</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">Questions</a>
+        <a href="#contact" class="btn" style="padding:10px 20px">Get a free sample</a>
+      </nav>
+    </div>
+  </header>
+
   <main>
-    <div class="dot" aria-hidden="true">✓</div>
-    <h1>Your first site is live.</h1>
-    <p>This page is built by Claude, stored on GitHub, and hosted for free on Cloudflare Pages. Every change pushed from now on goes live automatically.</p>
-    <footer>Starter page · replace me with something great</footer>
+    <div class="hero">
+      <div class="wrap">
+        <div>
+          <p class="eyebrow">Websites for local businesses</p>
+          <h1>Get found online. Get more customers.</h1>
+          <p class="lead">Most people look up a business on their phone before they call or walk in. I build simple, good-looking websites that show your services, hours and photos, and let customers call or book with one tap.</p>
+          <div class="actions">
+            <a href="#contact" class="btn">Get a free sample site</a>
+            <a href="#pricing" class="btn ghost">See pricing</a>
+          </div>
+        </div>
+        <div class="phone" aria-hidden="true">
+          <div class="screen">
+            <div class="top">
+              <small>Your business here</small>
+              <h3>Main Street Barbers</h3>
+            </div>
+            <div class="body">
+              <div class="row"><span>Haircut</span><b>$25</b></div>
+              <div class="row"><span>Beard trim</span><b>$15</b></div>
+              <div class="row"><span>Open today</span><b>9 AM to 6 PM</b></div>
+              <span class="call">Tap to call</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="services" class="alt">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Everything a local business needs, nothing it doesn't</h2>
+          <p>No confusing tech, no giant bills. Just a website that works and brings in customers.</p>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <div class="icon">📱</div>
+            <h3>Great on phones</h3>
+            <p>Your site looks sharp and loads fast on any phone, tablet or computer.</p>
+          </div>
+          <div class="card">
+            <div class="icon">📞</div>
+            <h3>One-tap call and book</h3>
+            <p>Customers can call you, get directions, book an appointment or pay online in one tap.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🛠️</div>
+            <h3>I handle the updates</h3>
+            <p>New hours, prices or photos? Just text me and it's done. You never have to touch the site yourself.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Simple, honest pricing</h2>
+          <p>One flat price for your site. No surprise fees. You own your domain and everything on it.</p>
+        </div>
+        <div class="grid-3">
+          <div class="card price-card">
+            <h3>Starter</h3>
+            <div class="price">$300 <small>one time</small></div>
+            <p>A single page with everything customers need.</p>
+            <ul>
+              <li>Services and prices</li>
+              <li>Hours, map and directions</li>
+              <li>Photo section</li>
+              <li>Call and text buttons</li>
+              <li>Contact form</li>
+            </ul>
+          </div>
+          <div class="card price-card featured">
+            <span class="badge">MOST POPULAR</span>
+            <h3>Business</h3>
+            <div class="price">$600 <small>one time</small></div>
+            <p>A full site for businesses ready to grow.</p>
+            <ul>
+              <li>Everything in Starter</li>
+              <li>3 to 5 pages</li>
+              <li>Photo gallery</li>
+              <li>Customer reviews</li>
+              <li>Online booking or "Pay now" button</li>
+            </ul>
+          </div>
+          <div class="card price-card">
+            <h3>Care plan</h3>
+            <div class="price">$25 <small>per month</small></div>
+            <p>Keep your site fresh without lifting a finger.</p>
+            <ul>
+              <li>Hosting setup and monitoring</li>
+              <li>Text and photo updates</li>
+              <li>Fixes whenever you need them</li>
+              <li>Monthly check-in</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="alt">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>How it works</h2>
+          <p>Most sites are live in about a week.</p>
+        </div>
+        <div class="grid-3 steps">
+          <div class="card">
+            <h3>Free sample</h3>
+            <p>I make a free sample homepage for your business so you can see exactly what you'd get before paying anything.</p>
+          </div>
+          <div class="card">
+            <h3>Quick chat</h3>
+            <p>We spend 15 minutes on your services, photos and anything you'd like changed. Half the price is due to start.</p>
+          </div>
+          <div class="card">
+            <h3>Go live</h3>
+            <p>Your site goes live on your own web address. You pay the rest, and your customers can find you.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Questions</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>Do I need to know anything about computers?</summary>
+            <p>Not at all. I set everything up and handle changes for you. If you can send a text, you're all set.</p>
+          </details>
+          <details>
+            <summary>Are there hosting fees?</summary>
+            <p>No monthly hosting fee. The only other cost is your web address (like yourbusiness.com), which is about $10 to $20 a year. It's registered in your name, so you always own it.</p>
+          </details>
+          <details>
+            <summary>Can customers pay or book on my site?</summary>
+            <p>Yes. I can add a "Pay now" button or online booking using Stripe, Square or a booking tool you already use. The money goes straight to your account.</p>
+          </details>
+          <details>
+            <summary>What if I already have a website?</summary>
+            <p>If it's outdated, hard to use on phones, or just a Facebook page, I can build you a new one and move your web address over.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" style="padding-top:0">
+      <div class="wrap">
+        <div class="contact">
+          <h2>Want to see your business online?</h2>
+          <p>Reach out and I'll build a free sample homepage for your business. No pressure, no obligation.</p>
+          <div class="actions">
+            <a href="tel:+10000000000" class="btn">Call or text Jacob</a>
+            <a href="mailto:hello@example.com?subject=Free%20sample%20website" class="btn ghost">Send an email</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    <div class="wrap">© 2026 Stillson Web Co. · Websites for local businesses</div>
+  </footer>
 </body>
 </html>
